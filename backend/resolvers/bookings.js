@@ -1,5 +1,4 @@
-const { create } = require("../models/bookings")
-const BookingModel = require("../models/bookings")
+const BookingModel = require("../models/booking")
 const EventModel = require("../models/event")
 const { getCreatorById, getEventById, formatEventData } = require("./helpers")
 
