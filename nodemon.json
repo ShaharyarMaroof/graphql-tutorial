@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONGOUSER": "admin",
+    "MONGOPASS": "m0ng0Adm1n",
+    "MONGO_DB_NAME": "events-db"
+  }
+}
