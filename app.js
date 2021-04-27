@@ -5,11 +5,13 @@ const mongoose = require("mongoose");
 
 const graphQlSchema = require("./backend/schema")
 const graphQlResolvers = require("./backend/resolvers");
+const isAuthorizedMiddleware = require("./backend/middlewares/isAuthorized")
 
 const app = express();
 
 // middlewares
 app.use(bodyParser.json())
+app.use(isAuthorizedMiddleware)
 
 // routes
 app.get("/", (req, res) => { res.send("Hello World") })

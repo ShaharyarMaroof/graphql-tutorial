@@ -25,6 +25,12 @@ const schema = buildSchema(`
     createdEvents: [Event!]
   }
 
+  type AuthData {
+    userId: ID!
+    token: String!
+    tokenExpiration: Int!
+  }
+
   input UserInput {
     name: String!
     email: String!
@@ -39,15 +45,21 @@ const schema = buildSchema(`
     updatedAt: String!
   }
 
+  input LoginInput {
+    email: String!
+    password: String!
+  }
+
   type RootQuery {
     events: [Event!]!
     users: [User!]!
     bookings: [Booking!]!
+    login(loginInput:LoginInput):AuthData!
   }
 
   type RootMutation {
-    createEvent(eventInput:EventInput):Event
-    createUser(userInput:UserInput):User
+    createEvent(eventInput:EventInput):Event!
+    createUser(userInput:UserInput):User!
     bookEvent(eventId:ID!): Booking!
     cancelBookingById(bookingId: ID!): Event!
   }

@@ -1,6 +1,6 @@
 const EventModel = require("../models/event")
 const UserModel = require("../models/user")
-const { formatEventData } = require("./helpers")
+const { formatEventData, isAuthenticated} = require("./helpers")
 
 const EventResolvers = {
   events: async () => {
@@ -13,19 +13,21 @@ const EventResolvers = {
       throw error
     }
   },
-  createEvent: async ({ eventInput }) => {
+  createEvent: async ({ eventInput }, req) => {
     try {
+      isAuthenticated(req)
+      
       const newEvent = new EventModel({
         ...eventInput,
         date: new Date(eventInput.date),
         price: +eventInput.price,
-        creator: "6073f10623502448a5aca80e",
+        creator: req.userId,
       })
 
       const result = await newEvent.save()
       let createdEvent = formatEventData(result)
 
-      const creator = await UserModel.findById("6073f10623502448a5aca80e")
+      const creator = await UserModel.findById(req.userId)
       if (!creator) throw new Error("Unable to find Creator")
 
       creator.createdEvents.push(newEvent)

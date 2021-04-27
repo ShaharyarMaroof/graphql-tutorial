@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
 const UserModel = require("../models/user")
 
@@ -35,6 +36,29 @@ const UserResolvers = {
       }
     } catch (error) {
       console.log(`Error Creating User`, error);
+      throw error
+    }
+  },
+
+  login: async ({ loginInput }) => {
+    try {
+      const user = await UserModel.findOne({ email: loginInput.email })
+      if (!user) throw new Error("Invalid Credentials")
+
+      const isPasswordMatched = await bcrypt.compare(loginInput.password, user.password)
+      if (!isPasswordMatched) throw new Error("Invalid Credentials")
+
+      const token = jwt.sign({
+        userId: user.id,
+        email: user.email
+      },
+        "supersecrettoken",
+        { expiresIn: "1h" }
+      )
+
+      return { userId: user.id, token, tokenExpiration: 1 }
+    } catch (error) {
+      console.log("Unable to Authenticate", error)
       throw error
     }
   }

@@ -48,9 +48,14 @@ const getEventById = async (eventId) => {
   }
 }
 
+const isAuthenticated = (req) => {
+  if (!req.isAuthorized) { throw new Error("Unauthenticated") }
+}
+
 module.exports = {
   getEventsList,
   getEventById,
   formatEventData,
-  getCreatorById
+  getCreatorById,
+  isAuthenticated
 }
