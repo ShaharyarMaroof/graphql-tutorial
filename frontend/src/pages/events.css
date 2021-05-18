@@ -1,0 +1,15 @@
+@media (min-width: 768px) {
+  .create-event-form .modal-container {
+      width: 32rem;
+      left: calc((100% - 32rem) / 2);
+  }
+}
+
+.events-control {
+  text-align: center;
+  border: 1px solid cadetblue;
+  padding: 1rem;
+  margin: 2rem auto;
+  width: 30rem;
+  max-width: 80%;
+}

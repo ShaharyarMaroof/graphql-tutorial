@@ -1,0 +1,34 @@
+.modal-container {
+  width: 90%;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+  position: fixed;
+  top: 20vh;
+  left: 5%;
+}
+
+.modal-container .modal-header {
+  background-color: cadetblue;
+  color: white;
+  padding: 1rem;
+}
+.modal-container .modal-content,
+.modal-container .modal-footer {
+  padding: 1rem;
+}
+
+.modal-container .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+.modal-container .modal-footer .modal-action {
+  margin: auto 1rem;
+}
+
+@media (min-width: 768px) {
+  .modal-container {
+    width: 50rem;
+    left: calc((100% - 50rem) / 2);
+  }
+}

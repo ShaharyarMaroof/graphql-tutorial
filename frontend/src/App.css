@@ -1,0 +1,19 @@
+.app-container {
+  margin: 4rem 2.5rem
+}
+
+button {
+  background-color: cadetblue;
+  cursor: pointer;
+  font: inherit;
+  border: 1px solid cadetblue;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  padding: 0.25rem 1rem;
+}
+
+button:hover,
+button:active {
+  background-color: aqua;
+  border-color: aqua;
+}

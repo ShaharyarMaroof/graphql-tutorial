@@ -1,0 +1,19 @@
+.form-control {
+  margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input,
+.form-control textarea {
+  width: 100%;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-control textarea {
+  resize: none;
+}
+
+.form-actions button {
+  margin-right: 1rem;
+}

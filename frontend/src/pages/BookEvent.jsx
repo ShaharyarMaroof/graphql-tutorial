@@ -4,7 +4,7 @@ const BookEvent = () => {
 
   return (
     <div>
-      Book Event Page
+      <h1>Book Event Page</h1>
     </div>
   )
 }
