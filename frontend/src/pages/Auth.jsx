@@ -1,65 +1,9 @@
 import React from 'react'
 
 import { InputControl } from "../components/FormControls"
+import { loginUser, signUpUser } from "../api"
 import AuthContext from '../context/auth-context'
 import "./auth.css"
-
-const loginUser = async ({ email, password }) => {
-  const requestBody = {
-    query: `
-    {
-      login(loginInput: {email: "${email}", password: "${password}"}) {
-        userId
-        token
-        tokenExpiration
-      }
-    }
-    `
-  }
-
-  const response = await fetch("http://localhost:8080/graphql", {
-    method: "POST",
-    body: JSON.stringify(requestBody),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-
-  if (response.status !== 200 && response.status !== 201) {
-    throw new Error("Failed to login", response.status)
-  }
-  const { data: { login } } = await response.json()
-  console.log({ login })
-  return login
-}
-
-const signUpUser = async ({ name, email, password }) => {
-  const requestBody = {
-    query: `
-    mutation{
-      createUser(userInput: {name: "${name}", email: "${email}", password: "${password}"}) {
-        _id
-        name
-        email
-      }
-    }
-    `
-  }
-
-  const response = await fetch("http://localhost:8080/graphql", {
-    method: "POST",
-    body: JSON.stringify(requestBody),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-
-  if (response.status !== 200 && response.status !== 201) {
-    throw new Error("Failed to Sign Up", response.status)
-  }
-  const { data: { createUser } } = await response.json()
-  console.log({ createUser })
-}
 
 const AuthPage = () => {
   const nameRef = React.useRef("")

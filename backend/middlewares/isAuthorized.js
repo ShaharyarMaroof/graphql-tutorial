@@ -1,18 +1,19 @@
 const jwt = require("jsonwebtoken")
 
 module.exports = (req, res, next) => {
+  const authHeader = req.get("Authorization")
+  if (!authHeader) {
+    req.isAuthorized = false
+    return next()
+  }
+
+  const token = authHeader.split(" ")[1]
+  if (!token || token === '') {
+    req.isAuthorized = false
+    return next()
+  }
+
   try {
-    const authHeader = req.get("Authorization")
-
-    if (!authHeader) {
-      throw new Error("No Authorization Header present")
-    }
-
-    const token = authHeader.split(" ")[1]
-    if (!token || token === '') {
-      throw new Error("No Token present")
-    }
-
     const decodedToken = jwt.verify(token, "supersecrettoken")
     if (!decodedToken) {
       throw new Error("Unable to decode token")

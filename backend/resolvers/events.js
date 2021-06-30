@@ -13,9 +13,10 @@ const EventResolvers = {
       throw error
     }
   },
-  createEvent: async ({ eventInput }, req) => {
+  createEvent: async (args, req) => {
     try {
       isAuthenticated(req)
+      const { eventInput } = args
       
       const newEvent = new EventModel({
         ...eventInput,
@@ -35,7 +36,7 @@ const EventResolvers = {
 
       return createdEvent
     } catch (error) {
-      console.log("Unable to create events", { eventInput, error })
+      console.log("Unable to create events\n", { eventInput, error })
       throw error
     }
   }

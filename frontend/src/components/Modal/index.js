@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types'
 
 import Backdrop from "../Backdrop"
-
 import "./styles.css";
 
 const Modal = (props) => {
@@ -22,7 +21,7 @@ const Modal = (props) => {
           {
             props.actions && props.actions.map((action) => {
               return (
-                <button className="modal-action" onClick={action.onClick} key={action.label}>{action.label}</button>
+                <button className="modal-action" disabled={Boolean(action.disabled)} onClick={action.onClick} key={action.label}>{action.label}</button>
               )
             })
           }
@@ -34,12 +33,11 @@ const Modal = (props) => {
 
 Modal.propTypes = {
   header: PropTypes.string,
-  children: PropTypes.elementType,
+  children: PropTypes.element,
   actions: PropTypes.array.isRequired
 }
 Modal.defaultProps = {
   header: () => "header",
-  children: () => <h1>Modal Content </h1>,
   actions: [],
 }
 

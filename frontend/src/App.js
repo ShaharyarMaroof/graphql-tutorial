@@ -28,14 +28,13 @@ function App() {
               {Boolean(appState.token) && <Redirect from="/" to="/events" exact />}
               {Boolean(appState.token) && <Redirect from="/auth" to="/events" exact />}
 
-              {!Boolean(appState.token) && <Route path="/auth" component={AuthPage} />}
-              
               {Boolean(appState.token) && <Route path="/book-event" component={BookEventPage} />}
+
+              {!Boolean(appState.token) && <Route path="/auth" component={AuthPage} />}
+              {!Boolean(appState.token) && <Redirect to="/auth" exact />}
               
               <Route path="/events" component={EventsPage} />
               <Route path="/bookings" component={BookingsPage} />
-
-              {!Boolean(appState.token) && <Redirect to="/auth" exact />}
             </Switch>
           </main>
         </AuthContext.Provider>
